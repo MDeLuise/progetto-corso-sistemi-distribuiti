@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Module peer_transactions_app</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module peer_transactions_app</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>Module used for starting and stopping the application.
+
+<p><b>Behaviours:</b> <a href="application.html"><tt>application</tt></a>.</p>
+<p><b>Authors:</b> Massimiliano De Luise, Massimo Comuzzo.</p>
+
+<h2><a name="description">Description</a></h2>Module used for starting and stopping the application.
+  It create the starting peer and connect them as specified.
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#connectNeighbors-2">connectNeighbors/2*</a></td><td>Connect the created peers as user specified.</td></tr>
+<tr><td valign="top"><a href="#eval-1">eval/1*</a></td><td>Given a string representing an erlang function, it return the erlang function.</td></tr>
+<tr><td valign="top"><a href="#id_to_pid-2">id_to_pid/2*</a></td><td>Given a list of id and a list of running processes Pids, it return a list of Pid.</td></tr>
+<tr><td valign="top"><a href="#ids_to_pids-2">ids_to_pids/2*</a></td><td>Given a list of list of id and a list of running processes Pids, it return a list of list
+  of Pid.</td></tr>
+<tr><td valign="top"><a href="#start-2">start/2</a></td><td>Create the specified peers and connect them.</td></tr>
+<tr><td valign="top"><a href="#stop-1">stop/1</a></td><td>Stop the application.</td></tr>
+<tr><td valign="top"><a href="#to_fun_tuple-1">to_fun_tuple/1*</a></td><td>Given a list of string representing erlang functions, it return a list of functions.</td></tr>
+<tr><td valign="top"><a href="#to_fun_tuples-1">to_fun_tuples/1*</a></td><td>Given a list of list of string representing erlang functions, it return a list of list of
+  functions.</td></tr>
+<tr><td valign="top"><a href="#tuple_to_record-1">tuple_to_record/1*</a></td><td>Given a tuple return the variables record representing it.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="connectNeighbors-2">connectNeighbors/2 *</a></h3>
+<div class="spec">
+<p><tt>connectNeighbors(Neighbors, Pids) -&gt; any()</tt></p>
+</div><p>Connect the created peers as user specified.</p>
+
+<h3 class="function"><a name="eval-1">eval/1 *</a></h3>
+<div class="spec">
+<p><tt>eval(Fun_string) -&gt; any()</tt></p>
+</div><p>Given a string representing an erlang function, it return the erlang function.</p>
+
+<h3 class="function"><a name="id_to_pid-2">id_to_pid/2 *</a></h3>
+<div class="spec">
+<p><tt>id_to_pid(List, Pids) -&gt; any()</tt></p>
+</div><p>Given a list of id and a list of running processes Pids, it return a list of Pid. Returned
+  Pid in position n is the mapped value of nth id of the list.</p>
+
+<h3 class="function"><a name="ids_to_pids-2">ids_to_pids/2 *</a></h3>
+<div class="spec">
+<p><tt>ids_to_pids(Ids, Pids) -&gt; any()</tt></p>
+</div><p>Given a list of list of id and a list of running processes Pids, it return a list of list
+  of Pid. Returned Pid in list n, position m is the mapped value of mth id of the nth list.</p>
+
+<h3 class="function"><a name="start-2">start/2</a></h3>
+<div class="spec">
+<p><tt>start(Type, StartArgs) -&gt; any()</tt></p>
+</div><p>Create the specified peers and connect them.</p>
+
+<h3 class="function"><a name="stop-1">stop/1</a></h3>
+<div class="spec">
+<p><tt>stop(State) -&gt; any()</tt></p>
+</div><p>Stop the application.</p>
+
+<h3 class="function"><a name="to_fun_tuple-1">to_fun_tuple/1 *</a></h3>
+<div class="spec">
+<p><tt>to_fun_tuple(Tuple) -&gt; any()</tt></p>
+</div><p>Given a list of string representing erlang functions, it return a list of functions.
+  Returned function in position n is the mapped value of nth string of the list.</p>
+
+<h3 class="function"><a name="to_fun_tuples-1">to_fun_tuples/1 *</a></h3>
+<div class="spec">
+<p><tt>to_fun_tuples(List) -&gt; any()</tt></p>
+</div><p>Given a list of list of string representing erlang functions, it return a list of list of
+  functions. Returned function in list n position m is the mapped value of nth string of the mth
+  list.</p>
+
+<h3 class="function"><a name="tuple_to_record-1">tuple_to_record/1 *</a></h3>
+<div class="spec">
+<p><tt>tuple_to_record(Tupla) -&gt; any()</tt></p>
+</div><p>Given a tuple return the variables record representing it.</p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc</i></p>
+</body>
+</html>

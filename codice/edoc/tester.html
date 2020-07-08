@@ -1,0 +1,366 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Module tester</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module tester</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>Testing module containing useful function for testing.
+
+<p><b>Authors:</b> Massimiliano De Luise, Massimo Comuzzo.</p>
+
+<h2><a name="description">Description</a></h2>Testing module containing useful function for testing.
+  The module contains test generator functions and simple test functions. The test generator
+  functions are nedded for removing the default test timeout of eunit (5 seconds).
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#all_confirmed-1">all_confirmed/1*</a></td><td>Verify if all passed transactions are confirmed.</td></tr>
+<tr><td valign="top"><a href="#all_equals-1">all_equals/1*</a></td><td>Verify if all passed transactions are equal.</td></tr>
+<tr><td valign="top"><a href="#all_id_unique-1">all_id_unique/1*</a></td><td>Verify if all passed transactions have unique ids.</td></tr>
+<tr><td valign="top"><a href="#all_seq_unique-1">all_seq_unique/1*</a></td><td>Verify if all passed transactions have unique sequence number.</td></tr>
+<tr><td valign="top"><a href="#collect_all_responses-3">collect_all_responses/3*</a></td><td>Collect specified responses from a inserted number of processes.</td></tr>
+<tr><td valign="top"><a href="#gossip1-0">gossip1/0*</a></td><td></td></tr>
+<tr><td valign="top"><a href="#gossip1_test_-0">gossip1_test_/0*</a></td><td>Test to verify the correctness of the created protocol.</td></tr>
+<tr><td valign="top"><a href="#gossip2-0">gossip2/0*</a></td><td></td></tr>
+<tr><td valign="top"><a href="#gossip2_test_-0">gossip2_test_/0*</a></td><td>Test to verify the correctness of the created protocol.</td></tr>
+<tr><td valign="top"><a href="#init1-0">init1/0*</a></td><td></td></tr>
+<tr><td valign="top"><a href="#init1_test_-0">init1_test_/0*</a></td><td>Test to check the correctness of the protocol created.</td></tr>
+<tr><td valign="top"><a href="#init2-0">init2/0*</a></td><td></td></tr>
+<tr><td valign="top"><a href="#init2_test_-0">init2_test_/0*</a></td><td>Test to check the correctness of the protocol created.</td></tr>
+<tr><td valign="top"><a href="#init3-0">init3/0*</a></td><td></td></tr>
+<tr><td valign="top"><a href="#init3_test_-0">init3_test_/0*</a></td><td>Test to check the correctness of the protocol created.</td></tr>
+<tr><td valign="top"><a href="#integration1-0">integration1/0*</a></td><td></td></tr>
+<tr><td valign="top"><a href="#integration1_test_-0">integration1_test_/0*</a></td><td>Test to verify the correctness of the created protocol.</td></tr>
+<tr><td valign="top"><a href="#integration2-0">integration2/0*</a></td><td></td></tr>
+<tr><td valign="top"><a href="#integration2_test_-0">integration2_test_/0*</a></td><td>Test to verify the correctness of the created protocol.</td></tr>
+<tr><td valign="top"><a href="#isis1-0">isis1/0*</a></td><td></td></tr>
+<tr><td valign="top"><a href="#isis1_test_-0">isis1_test_/0*</a></td><td>Test to verify the correctness of the created protocol.</td></tr>
+<tr><td valign="top"><a href="#isis2-0">isis2/0*</a></td><td></td></tr>
+<tr><td valign="top"><a href="#isis2_test_-0">isis2_test_/0*</a></td><td>Test to verify the correctness of the created protocol.</td></tr>
+<tr><td valign="top"><a href="#isis3-0">isis3/0*</a></td><td></td></tr>
+<tr><td valign="top"><a href="#isis3_test_-0">isis3_test_/0*</a></td><td>Test to verify the correctness of the created protocol.</td></tr>
+<tr><td valign="top"><a href="#isis4-0">isis4/0*</a></td><td></td></tr>
+<tr><td valign="top"><a href="#isis4_test_-0">isis4_test_/0*</a></td><td>Test to verify the correctness of the created protocol.</td></tr>
+<tr><td valign="top"><a href="#isis5-0">isis5/0*</a></td><td></td></tr>
+<tr><td valign="top"><a href="#isis5_test_-0">isis5_test_/0*</a></td><td>Test to verify the correctness of the created protocol.</td></tr>
+<tr><td valign="top"><a href="#isis6-0">isis6/0*</a></td><td></td></tr>
+<tr><td valign="top"><a href="#isis6_test_-0">isis6_test_/0*</a></td><td>Test to verify the correctness of the created protocol.</td></tr>
+<tr><td valign="top"><a href="#isis_crash1-0">isis_crash1/0*</a></td><td></td></tr>
+<tr><td valign="top"><a href="#isis_crash1_test_-0">isis_crash1_test_/0*</a></td><td>Test to verify the correctness of the created protocol.</td></tr>
+<tr><td valign="top"><a href="#isis_crash2-0">isis_crash2/0*</a></td><td></td></tr>
+<tr><td valign="top"><a href="#isis_crash2_test_-0">isis_crash2_test_/0*</a></td><td>Test to verify the correctness of the created protocol.</td></tr>
+<tr><td valign="top"><a href="#isis_crash3-0">isis_crash3/0*</a></td><td></td></tr>
+<tr><td valign="top"><a href="#isis_crash3_test_-0">isis_crash3_test_/0*</a></td><td>Test to verify the correctness of the created protocol.</td></tr>
+<tr><td valign="top"><a href="#loop_exec1-0">loop_exec1/0*</a></td><td></td></tr>
+<tr><td valign="top"><a href="#loop_exec1_test_-0">loop_exec1_test_/0*</a></td><td>Test to check the correctness of the protocol created.</td></tr>
+<tr><td valign="top"><a href="#loop_exec2-0">loop_exec2/0*</a></td><td></td></tr>
+<tr><td valign="top"><a href="#loop_exec2_test_-0">loop_exec2_test_/0*</a></td><td>Test to check the correctness of the protocol created.</td></tr>
+<tr><td valign="top"><a href="#my_time-0">my_time/0*</a></td><td>Return a string representing actual date and time.</td></tr>
+<tr><td valign="top"><a href="#neighbors1-0">neighbors1/0*</a></td><td></td></tr>
+<tr><td valign="top"><a href="#neighbors1_test_-0">neighbors1_test_/0*</a></td><td>Test to verify the correctness of the created protocol.</td></tr>
+<tr><td valign="top"><a href="#neighbors2-0">neighbors2/0*</a></td><td></td></tr>
+<tr><td valign="top"><a href="#neighbors2_test_-0">neighbors2_test_/0*</a></td><td>Test to verify the correctness of the created protocol.</td></tr>
+<tr><td valign="top"><a href="#request_to_all-4">request_to_all/4*</a></td><td>Send a specified message to all indicated processes.</td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="all_confirmed-1">all_confirmed/1 *</a></h3>
+<div class="spec">
+<p><tt>all_confirmed(Trans) -&gt; any()</tt></p>
+</div><p>Verify if all passed transactions are confirmed.</p>
+
+<h3 class="function"><a name="all_equals-1">all_equals/1 *</a></h3>
+<div class="spec">
+<p><tt>all_equals(Other) -&gt; any()</tt></p>
+</div><p>Verify if all passed transactions are equal.</p>
+
+<h3 class="function"><a name="all_id_unique-1">all_id_unique/1 *</a></h3>
+<div class="spec">
+<p><tt>all_id_unique(Other) -&gt; any()</tt></p>
+</div><p>Verify if all passed transactions have unique ids.</p>
+
+<h3 class="function"><a name="all_seq_unique-1">all_seq_unique/1 *</a></h3>
+<div class="spec">
+<p><tt>all_seq_unique(Other) -&gt; any()</tt></p>
+</div><p>Verify if all passed transactions have unique sequence number.</p>
+
+<h3 class="function"><a name="collect_all_responses-3">collect_all_responses/3 *</a></h3>
+<div class="spec">
+<p><tt>collect_all_responses(Num, Responses, Received) -&gt; any()</tt></p>
+</div><p>Collect specified responses from a inserted number of processes.</p>
+
+<h3 class="function"><a name="gossip1-0">gossip1/0 *</a></h3>
+<div class="spec">
+<p><tt>gossip1() -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="gossip1_test_-0">gossip1_test_/0 *</a></h3>
+<div class="spec">
+<p><tt>gossip1_test_() -&gt; any()</tt></p>
+</div><p>Test to verify the correctness of the created protocol. Description: Some processes are in
+  the same network and have a partial view of the transactions, through gossiping they must reach
+  a shared consistent view.</p>
+
+<h3 class="function"><a name="gossip2-0">gossip2/0 *</a></h3>
+<div class="spec">
+<p><tt>gossip2() -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="gossip2_test_-0">gossip2_test_/0 *</a></h3>
+<div class="spec">
+<p><tt>gossip2_test_() -&gt; any()</tt></p>
+</div><p>Test to verify the correctness of the created protocol. Description: Some processes are in
+  the same network and have a partial view of the transactions, one of them crash. Through
+  gossiping they must reach a shared consistent view.</p>
+
+<h3 class="function"><a name="init1-0">init1/0 *</a></h3>
+<div class="spec">
+<p><tt>init1() -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="init1_test_-0">init1_test_/0 *</a></h3>
+<div class="spec">
+<p><tt>init1_test_() -&gt; any()</tt></p>
+</div><p>Test to check the correctness of the protocol created. Description: Some processes are in
+  the same network, two of them have an init section containing one send operation.
+  They must reach an agreement on the sequence numbers of the transactions, and in the end all
+  processes must be notified about the two transactions.</p>
+
+<h3 class="function"><a name="init2-0">init2/0 *</a></h3>
+<div class="spec">
+<p><tt>init2() -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="init2_test_-0">init2_test_/0 *</a></h3>
+<div class="spec">
+<p><tt>init2_test_() -&gt; any()</tt></p>
+</div><p>Test to check the correctness of the protocol created. Description: Some processes are in
+  the same network, two of them have an init section containing two send operations.
+  They must reach an agreement on the sequence numbers of the transactions, and in the end all
+  processes must be notified about the four transactions.</p>
+
+<h3 class="function"><a name="init3-0">init3/0 *</a></h3>
+<div class="spec">
+<p><tt>init3() -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="init3_test_-0">init3_test_/0 *</a></h3>
+<div class="spec">
+<p><tt>init3_test_() -&gt; any()</tt></p>
+</div><p>Test to check the correctness of the protocol created. Description: Some processes are in
+  the same network, two of them have an init section containing three send operations.
+  They must reach an agreement on the sequence numbers of the transactions, and in the end all
+  processes must be notified about the x transactions and must execute them atomically.</p>
+
+<h3 class="function"><a name="integration1-0">integration1/0 *</a></h3>
+<div class="spec">
+<p><tt>integration1() -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="integration1_test_-0">integration1_test_/0 *</a></h3>
+<div class="spec">
+<p><tt>integration1_test_() -&gt; any()</tt></p>
+</div><p>Test to verify the correctness of the created protocol. Description: Tests within
+  initially processes doesn't known each other, there's a support_server which help the
+  connection. Three processes want create a transaction at the same time. They must reach an
+  agreement about sequence number of transactions, and in the end all processes must be notify
+  about the three transactions. This test contain condition of neighbors, gossip and isis tests.</p>
+
+<h3 class="function"><a name="integration2-0">integration2/0 *</a></h3>
+<div class="spec">
+<p><tt>integration2() -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="integration2_test_-0">integration2_test_/0 *</a></h3>
+<div class="spec">
+<p><tt>integration2_test_() -&gt; any()</tt></p>
+</div><p>Test to verify the correctness of the created protocol. Description: Tests within
+  initially processes doesn't known each other, there's a support_server which help the
+  connection. Three processes want create a transaction at the same time, and 4 processes crash.
+  The remaining processes must reach an agreement about sequence number of transactions, and in
+  the end all remaining processes must be notify about the three transactions. This test contain %% condition of neighbors, gossip and isis tests.</p>
+
+<h3 class="function"><a name="isis1-0">isis1/0 *</a></h3>
+<div class="spec">
+<p><tt>isis1() -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="isis1_test_-0">isis1_test_/0 *</a></h3>
+<div class="spec">
+<p><tt>isis1_test_() -&gt; any()</tt></p>
+</div><p>Test to verify the correctness of the created protocol. Description: Some processes are in
+  the same network, one of them want to create a transaction. They must reach an agreement about
+  sequence number of transaction, and in the end all of them must be notify about it.</p>
+
+<h3 class="function"><a name="isis2-0">isis2/0 *</a></h3>
+<div class="spec">
+<p><tt>isis2() -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="isis2_test_-0">isis2_test_/0 *</a></h3>
+<div class="spec">
+<p><tt>isis2_test_() -&gt; any()</tt></p>
+</div><p>Test to verify the correctness of the created protocol. Description: Some processes are in
+  the same network, two of them want to create a transaction at the same time. They must reach an
+  agreement about sequence number of transactions, and in the end all processes must be notify
+  about the two transactions.</p>
+
+<h3 class="function"><a name="isis3-0">isis3/0 *</a></h3>
+<div class="spec">
+<p><tt>isis3() -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="isis3_test_-0">isis3_test_/0 *</a></h3>
+<div class="spec">
+<p><tt>isis3_test_() -&gt; any()</tt></p>
+</div><p>Test to verify the correctness of the created protocol. Description: Some processes are in
+  the same network, all of them want to create a transaction at the same time. They must reach an
+  agreement about sequence number of transactions, and in the end all processes must have the
+  same transactions sequence.</p>
+
+<h3 class="function"><a name="isis4-0">isis4/0 *</a></h3>
+<div class="spec">
+<p><tt>isis4() -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="isis4_test_-0">isis4_test_/0 *</a></h3>
+<div class="spec">
+<p><tt>isis4_test_() -&gt; any()</tt></p>
+</div><p>Test to verify the correctness of the created protocol. Description: Some processes are in
+  the same network, two of them want to create a transaction at the same time. They must reach an
+  agreement about sequence number of transactions, and in the end all processes must be notify
+  about the two transactions.</p>
+
+<h3 class="function"><a name="isis5-0">isis5/0 *</a></h3>
+<div class="spec">
+<p><tt>isis5() -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="isis5_test_-0">isis5_test_/0 *</a></h3>
+<div class="spec">
+<p><tt>isis5_test_() -&gt; any()</tt></p>
+</div><p>Test to verify the correctness of the created protocol. Description: Some processes are in
+  the same network, two of them want to create a transaction at the same time. They must reach an
+  agreement about sequence number of transactions, and in the end all processes must be notify
+  about the two transactions.</p>
+
+<h3 class="function"><a name="isis6-0">isis6/0 *</a></h3>
+<div class="spec">
+<p><tt>isis6() -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="isis6_test_-0">isis6_test_/0 *</a></h3>
+<div class="spec">
+<p><tt>isis6_test_() -&gt; any()</tt></p>
+</div><p>Test to verify the correctness of the created protocol. Description: Some processes are in
+  the same network and one of them want to create a transaction. When it start the transaction,
+  before it will be confirmed, a new process connect to the first. The transaction must be
+  confirmed, and in the end all processes must be notify about the transaction.</p>
+
+<h3 class="function"><a name="isis_crash1-0">isis_crash1/0 *</a></h3>
+<div class="spec">
+<p><tt>isis_crash1() -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="isis_crash1_test_-0">isis_crash1_test_/0 *</a></h3>
+<div class="spec">
+<p><tt>isis_crash1_test_() -&gt; any()</tt></p>
+</div><p>Test to verify the correctness of the created protocol. Description: Some processes are in
+  the same network and one of them want to create a transaction. When it start the transaction,
+  before it will be confirmed, the process crash. The transaction must be aborted, and in the end
+  all processes must be notify about the transaction.</p>
+
+<h3 class="function"><a name="isis_crash2-0">isis_crash2/0 *</a></h3>
+<div class="spec">
+<p><tt>isis_crash2() -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="isis_crash2_test_-0">isis_crash2_test_/0 *</a></h3>
+<div class="spec">
+<p><tt>isis_crash2_test_() -&gt; any()</tt></p>
+</div><p>Test to verify the correctness of the created protocol. Description: Some processes are in
+  the same network and one of them want to create a transaction. When it start the transaction,
+  before it will be confirmed, a neighbor of first process crash. The transaction must be
+  confirmed, and in the end all processes must be notify about the transaction.</p>
+
+<h3 class="function"><a name="isis_crash3-0">isis_crash3/0 *</a></h3>
+<div class="spec">
+<p><tt>isis_crash3() -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="isis_crash3_test_-0">isis_crash3_test_/0 *</a></h3>
+<div class="spec">
+<p><tt>isis_crash3_test_() -&gt; any()</tt></p>
+</div><p>Test to verify the correctness of the created protocol. Description: Some processes are in
+  the same network and one of them want to create a transaction. When the transaction is confirmed
+  the sender crash. In the end all processes must be notify about the transaction.</p>
+
+<h3 class="function"><a name="loop_exec1-0">loop_exec1/0 *</a></h3>
+<div class="spec">
+<p><tt>loop_exec1() -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="loop_exec1_test_-0">loop_exec1_test_/0 *</a></h3>
+<div class="spec">
+<p><tt>loop_exec1_test_() -&gt; any()</tt></p>
+</div><p>Test to check the correctness of the protocol created. Description: Some processes are in
+  the same network, two of them have an loop section containing the same send operation.
+  They must reach an agreement on the sequence numbers of the transactions, and in the end all
+  processes must execute the transactions and reach the same values for the state variables.</p>
+
+<h3 class="function"><a name="loop_exec2-0">loop_exec2/0 *</a></h3>
+<div class="spec">
+<p><tt>loop_exec2() -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="loop_exec2_test_-0">loop_exec2_test_/0 *</a></h3>
+<div class="spec">
+<p><tt>loop_exec2_test_() -&gt; any()</tt></p>
+</div><p>Test to check the correctness of the protocol created. Description: Some processes are in
+  the same network, one of them have an loop section containing a guarded send.
+  They must reach an agreement on the sequence numbers of the five transactions, and in the end
+  all processes must execute the transactions and reach the same values for the state variables.</p>
+
+<h3 class="function"><a name="my_time-0">my_time/0 *</a></h3>
+<div class="spec">
+<p><tt>my_time() -&gt; any()</tt></p>
+</div><p>Return a string representing actual date and time.</p>
+
+<h3 class="function"><a name="neighbors1-0">neighbors1/0 *</a></h3>
+<div class="spec">
+<p><tt>neighbors1() -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="neighbors1_test_-0">neighbors1_test_/0 *</a></h3>
+<div class="spec">
+<p><tt>neighbors1_test_() -&gt; any()</tt></p>
+</div><p>Test to verify the correctness of the created protocol. Description: Simple neighbors test
+  within initially processes doesn't known each other, there's a support_server which help the
+  connection.</p>
+
+<h3 class="function"><a name="neighbors2-0">neighbors2/0 *</a></h3>
+<div class="spec">
+<p><tt>neighbors2() -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="neighbors2_test_-0">neighbors2_test_/0 *</a></h3>
+<div class="spec">
+<p><tt>neighbors2_test_() -&gt; any()</tt></p>
+</div><p>Test to verify the correctness of the created protocol. Description: Neighbors test with
+  crash of one process.</p>
+
+<h3 class="function"><a name="request_to_all-4">request_to_all/4 *</a></h3>
+<div class="spec">
+<p><tt>request_to_all(Req, Other, Num, Res) -&gt; any()</tt></p>
+</div><p>Send a specified message to all indicated processes.</p>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc</i></p>
+</body>
+</html>

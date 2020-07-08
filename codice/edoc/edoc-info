@@ -1,0 +1,2 @@
+%% encoding: UTF-8
+{modules,[peer,peer_node,peer_transactions_app,tester,user_functions]}.

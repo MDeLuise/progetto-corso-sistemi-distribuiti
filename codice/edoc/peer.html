@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Module peer</title>
+<link rel="stylesheet" type="text/css" href="stylesheet.css" title="EDoc">
+</head>
+<body bgcolor="white">
+<div class="navbar"><a name="#navbar_top"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<hr>
+
+<h1>Module peer</h1>
+<ul class="index"><li><a href="#description">Description</a></li><li><a href="#index">Function Index</a></li><li><a href="#functions">Function Details</a></li></ul>Module representing the peer process of the network.
+
+<p><b>Behaviours:</b> <a href="gen_server.html"><tt>gen_server</tt></a>.</p>
+<p><b>Authors:</b> Massimiliano De Luise, Massimo Comuzzo.</p>
+
+<h2><a name="description">Description</a></h2>Module representing the peer process of the network.
+<h2><a name="index">Function Index</a></h2>
+<table width="100%" border="1" cellspacing="0" cellpadding="2" summary="function index"><tr><td valign="top"><a href="#add_nodes-2">add_nodes/2</a></td><td></td></tr>
+<tr><td valign="top"><a href="#add_trans-6">add_trans/6</a></td><td></td></tr>
+<tr><td valign="top"><a href="#apply_tran-2">apply_tran/2*</a></td><td>Applies Tran to Vars and returns the updated state variables.</td></tr>
+<tr><td valign="top"><a href="#build_pid_dict-1">build_pid_dict/1*</a></td><td>Given a list of pids returns a dict where the keys are the elements of the list.</td></tr>
+<tr><td valign="top"><a href="#build_proposed_seq-1">build_proposed_seq/1*</a></td><td></td></tr>
+<tr><td valign="top"><a href="#check_and_reap-3">check_and_reap/3*</a></td><td></td></tr>
+<tr><td valign="top"><a href="#execute_ready-1">execute_ready/1*</a></td><td>if there are frozen transactions that were not already executed it applies them to the state and returns the result.</td></tr>
+<tr><td valign="top"><a href="#find_in_list-2">find_in_list/2*</a></td><td></td></tr>
+<tr><td valign="top"><a href="#frozen_trans-1">frozen_trans/1*</a></td><td>Returns the list of the first frozen transactions.</td></tr>
+<tr><td valign="top"><a href="#guard_send-1">guard_send/1*</a></td><td>if Send is a send where the availability condition is unspecified it converts it to a guarded send that is always enabled.</td></tr>
+<tr><td valign="top"><a href="#handle_call-3">handle_call/3</a></td><td></td></tr>
+<tr><td valign="top"><a href="#handle_cast-2">handle_cast/2</a></td><td></td></tr>
+<tr><td valign="top"><a href="#handle_info-2">handle_info/2</a></td><td></td></tr>
+<tr><td valign="top"><a href="#init-1">init/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#link_and_notify-1">link_and_notify/1*</a></td><td></td></tr>
+<tr><td valign="top"><a href="#merge_neighbors-2">merge_neighbors/2*</a></td><td></td></tr>
+<tr><td valign="top"><a href="#not_avail-2">not_avail/2*</a></td><td></td></tr>
+<tr><td valign="top"><a href="#reap_crashed_responses-2">reap_crashed_responses/2*</a></td><td></td></tr>
+<tr><td valign="top"><a href="#send-3">send/3</a></td><td></td></tr>
+<tr><td valign="top"><a href="#send-4">send/4</a></td><td></td></tr>
+<tr><td valign="top"><a href="#send_to_nodes-2">send_to_nodes/2*</a></td><td>sends a cast with Msg to every node in Nodes.</td></tr>
+<tr><td valign="top"><a href="#start-1">start/1</a></td><td>Given a list of element, create a new peer process, the spawned peer knows no nodes and
+  have state equals to the given list.</td></tr>
+<tr><td valign="top"><a href="#start-2">start/2</a></td><td>Given a list of nodes, create a new support_server knowing the nodes.</td></tr>
+<tr><td valign="top"><a href="#start-4">start/4</a></td><td></td></tr>
+<tr><td valign="top"><a href="#stop-1">stop/1</a></td><td></td></tr>
+<tr><td valign="top"><a href="#to_guarded-1">to_guarded/1*</a></td><td>if Sends contains sends where the availability condition is unspecified it converts them to guarded sends that are always enabled.</td></tr>
+<tr><td valign="top"><a href="#trans_to_list-1">trans_to_list/1*</a></td><td></td></tr>
+<tr><td valign="top"><a href="#update_trans-3">update_trans/3*</a></td><td></td></tr>
+</table>
+
+<h2><a name="functions">Function Details</a></h2>
+
+<h3 class="function"><a name="add_nodes-2">add_nodes/2</a></h3>
+<div class="spec">
+<p><tt>add_nodes(Pid::pid(), Nodes::[pid()]) -&gt; ok</tt><br></p>
+</div>
+
+<h3 class="function"><a name="add_trans-6">add_trans/6</a></h3>
+<div class="spec">
+<p><tt>add_trans(Pid::pid(), Id::<a href="#type-trans_id">trans_id()</a>, Seq::<a href="#type-trans_seq">trans_seq()</a>, Status::<a href="#type-trans_state">trans_state()</a>, Guard::<a href="#type-guard">guard()</a>, Command::<a href="#type-command">command()</a>) -&gt; ok</tt><br></p>
+</div>
+
+<h3 class="function"><a name="apply_tran-2">apply_tran/2 *</a></h3>
+<div class="spec">
+<p><tt>apply_tran(Tran::#transaction{id = <a href="#type-trans_id">trans_id()</a>, state = <a href="#type-trans_state">trans_state()</a>, seq_number = <a href="#type-trans_seq">trans_seq()</a>, guard = <a href="#type-guard">guard()</a>, command = <a href="#type-command">command()</a>}, Vars::#variables{}) -&gt; #variables{}</tt><br></p>
+<p><tt>Tran</tt>: transaction to apply<br>
+<tt>Vars</tt>: current state variables<br>
+</p>
+<p>returns: Vars if state(Tran) == aborted or if not Vars |= guard(Tran) else apply(command(Tran), Vars)</p>
+</div><p>Applies Tran to Vars and returns the updated state variables.
+ REQUIRE state(Tran) != pending</p>
+
+<h3 class="function"><a name="build_pid_dict-1">build_pid_dict/1 *</a></h3>
+<div class="spec">
+<p><tt>build_pid_dict(Pids::[pid()]) -&gt; <a href="dict.html#type-dict">dict:dict</a>(pid(), atom())</tt><br></p>
+</div><p>Given a list of pids returns a dict where the keys are the elements of the list.</p>
+
+<h3 class="function"><a name="build_proposed_seq-1">build_proposed_seq/1 *</a></h3>
+<div class="spec">
+<p><tt>build_proposed_seq(Dict::<a href="orddict.html#type-orddict">orddict:orddict</a>(<a href="#type-trans_seq">trans_seq()</a>, #transaction{id = <a href="#type-trans_id">trans_id()</a>, state = <a href="#type-trans_state">trans_state()</a>, seq_number = <a href="#type-trans_seq">trans_seq()</a>, guard = <a href="#type-guard">guard()</a>, command = <a href="#type-command">command()</a>})) -&gt; <a href="#type-trans_seq">trans_seq()</a></tt><br></p>
+</div>
+
+<h3 class="function"><a name="check_and_reap-3">check_and_reap/3 *</a></h3>
+<div class="spec">
+<p><tt>check_and_reap(TransID::<a href="#type-trans_id">trans_id()</a>, Tran::#tran_aux_info{asked_this = [pid()], max_prop_seq = <a href="#type-trans_seq">trans_seq()</a>, waiting_response = <a href="dict.html#type-dict">dict:dict</a>(pid(), atom()), current_seq = <a href="#type-trans_seq">trans_seq()</a>}, Pid::pid()) -&gt; pid()</tt><br></p>
+</div>
+
+<h3 class="function"><a name="execute_ready-1">execute_ready/1 *</a></h3>
+<div class="spec">
+<p><tt>execute_ready(State::#state{nodes = [pid()], transactions = <a href="orddict.html#type-orddict">orddict:orddict</a>(<a href="#type-trans_seq">trans_seq()</a>, #transaction{id = <a href="#type-trans_id">trans_id()</a>, state = <a href="#type-trans_state">trans_state()</a>, seq_number = <a href="#type-trans_seq">trans_seq()</a>, guard = <a href="#type-guard">guard()</a>, command = <a href="#type-command">command()</a>}), vars = #variables{}, sending_tran = {just, #transaction{id = <a href="#type-trans_id">trans_id()</a>, state = <a href="#type-trans_state">trans_state()</a>, seq_number = <a href="#type-trans_seq">trans_seq()</a>, guard = <a href="#type-guard">guard()</a>, command = <a href="#type-command">command()</a>}} | nothing, monitoring = [{pid(), #transaction{id = <a href="#type-trans_id">trans_id()</a>, state = <a href="#type-trans_state">trans_state()</a>, seq_number = <a href="#type-trans_seq">trans_seq()</a>, guard = <a href="#type-guard">guard()</a>, command = <a href="#type-command">command()</a>}}], monitored = [pid()], candidates = <a href="dict.html#type-dict">dict:dict</a>(pid(), atom()), tran_infos = <a href="dict.html#type-dict">dict:dict</a>(<a href="#type-trans_id">trans_id()</a>, #tran_aux_info{asked_this = [pid()], max_prop_seq = <a href="#type-trans_seq">trans_seq()</a>, waiting_response = <a href="dict.html#type-dict">dict:dict</a>(pid(), atom()), current_seq = <a href="#type-trans_seq">trans_seq()</a>}), init = [{<a href="#type-guard">guard()</a>, <a href="#type-guard">guard()</a>, <a href="#type-command">command()</a>}], loop = [{<a href="#type-guard">guard()</a>, <a href="#type-guard">guard()</a>, <a href="#type-command">command()</a>}], executed = integer()}) -&gt; #state{nodes = [pid()], transactions = <a href="orddict.html#type-orddict">orddict:orddict</a>(<a href="#type-trans_seq">trans_seq()</a>, #transaction{id = <a href="#type-trans_id">trans_id()</a>, state = <a href="#type-trans_state">trans_state()</a>, seq_number = <a href="#type-trans_seq">trans_seq()</a>, guard = <a href="#type-guard">guard()</a>, command = <a href="#type-command">command()</a>}), vars = #variables{}, sending_tran = {just, #transaction{id = <a href="#type-trans_id">trans_id()</a>, state = <a href="#type-trans_state">trans_state()</a>, seq_number = <a href="#type-trans_seq">trans_seq()</a>, guard = <a href="#type-guard">guard()</a>, command = <a href="#type-command">command()</a>}} | nothing, monitoring = [{pid(), #transaction{id = <a href="#type-trans_id">trans_id()</a>, state = <a href="#type-trans_state">trans_state()</a>, seq_number = <a href="#type-trans_seq">trans_seq()</a>, guard = <a href="#type-guard">guard()</a>, command = <a href="#type-command">command()</a>}}], monitored = [pid()], candidates = <a href="dict.html#type-dict">dict:dict</a>(pid(), atom()), tran_infos = <a href="dict.html#type-dict">dict:dict</a>(<a href="#type-trans_id">trans_id()</a>, #tran_aux_info{asked_this = [pid()], max_prop_seq = <a href="#type-trans_seq">trans_seq()</a>, waiting_response = <a href="dict.html#type-dict">dict:dict</a>(pid(), atom()), current_seq = <a href="#type-trans_seq">trans_seq()</a>}), init = [{<a href="#type-guard">guard()</a>, <a href="#type-guard">guard()</a>, <a href="#type-command">command()</a>}], loop = [{<a href="#type-guard">guard()</a>, <a href="#type-guard">guard()</a>, <a href="#type-command">command()</a>}], executed = integer()}</tt><br></p>
+<p>returns: a state where the state variables and the number of executed transactions are update accordingly</p>
+</div><p>if there are frozen transactions that were not already executed it applies them to the state and returns the result.</p>
+
+<h3 class="function"><a name="find_in_list-2">find_in_list/2 *</a></h3>
+<div class="spec">
+<p><tt>find_in_list(Fun::function(), List::[any()]) -&gt; {value, any()} | false</tt><br></p>
+</div>
+
+<h3 class="function"><a name="frozen_trans-1">frozen_trans/1 *</a></h3>
+<div class="spec">
+<p><tt>frozen_trans(State::#state{nodes = [pid()], transactions = <a href="orddict.html#type-orddict">orddict:orddict</a>(<a href="#type-trans_seq">trans_seq()</a>, #transaction{id = <a href="#type-trans_id">trans_id()</a>, state = <a href="#type-trans_state">trans_state()</a>, seq_number = <a href="#type-trans_seq">trans_seq()</a>, guard = <a href="#type-guard">guard()</a>, command = <a href="#type-command">command()</a>}), vars = #variables{}, sending_tran = {just, #transaction{id = <a href="#type-trans_id">trans_id()</a>, state = <a href="#type-trans_state">trans_state()</a>, seq_number = <a href="#type-trans_seq">trans_seq()</a>, guard = <a href="#type-guard">guard()</a>, command = <a href="#type-command">command()</a>}} | nothing, monitoring = [{pid(), #transaction{id = <a href="#type-trans_id">trans_id()</a>, state = <a href="#type-trans_state">trans_state()</a>, seq_number = <a href="#type-trans_seq">trans_seq()</a>, guard = <a href="#type-guard">guard()</a>, command = <a href="#type-command">command()</a>}}], monitored = [pid()], candidates = <a href="dict.html#type-dict">dict:dict</a>(pid(), atom()), tran_infos = <a href="dict.html#type-dict">dict:dict</a>(<a href="#type-trans_id">trans_id()</a>, #tran_aux_info{asked_this = [pid()], max_prop_seq = <a href="#type-trans_seq">trans_seq()</a>, waiting_response = <a href="dict.html#type-dict">dict:dict</a>(pid(), atom()), current_seq = <a href="#type-trans_seq">trans_seq()</a>}), init = [{<a href="#type-guard">guard()</a>, <a href="#type-guard">guard()</a>, <a href="#type-command">command()</a>}], loop = [{<a href="#type-guard">guard()</a>, <a href="#type-guard">guard()</a>, <a href="#type-command">command()</a>}], executed = integer()}) -&gt; [#transaction{id = <a href="#type-trans_id">trans_id()</a>, state = <a href="#type-trans_state">trans_state()</a>, seq_number = <a href="#type-trans_seq">trans_seq()</a>, guard = <a href="#type-guard">guard()</a>, command = <a href="#type-command">command()</a>}]</tt><br></p>
+<p>returns: a list containing the first ordered transactions that are frozen</p>
+</div><p>Returns the list of the first frozen transactions</p>
+
+<h3 class="function"><a name="guard_send-1">guard_send/1 *</a></h3>
+<div class="spec">
+<p><tt>guard_send(Send::{<a href="#type-guard">guard()</a>, <a href="#type-guard">guard()</a>, <a href="#type-command">command()</a>} | {<a href="#type-guard">guard()</a>, <a href="#type-command">command()</a>}) -&gt; {<a href="#type-guard">guard()</a>, <a href="#type-guard">guard()</a>, <a href="#type-command">command()</a>}</tt><br></p>
+</div><p>if Send is a send where the availability condition is unspecified it converts it to a guarded send that is always enabled</p>
+
+<h3 class="function"><a name="handle_call-3">handle_call/3</a></h3>
+<div class="spec">
+<p><tt>handle_call(X1, Reason, State) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="handle_cast-2">handle_cast/2</a></h3>
+<div class="spec">
+<p><tt>handle_cast(Request, State) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="handle_info-2">handle_info/2</a></h3>
+<div class="spec">
+<p><tt>handle_info(Message, State) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="init-1">init/1</a></h3>
+<div class="spec">
+<p><tt>init(X1) -&gt; any()</tt></p>
+</div>
+
+<h3 class="function"><a name="link_and_notify-1">link_and_notify/1 *</a></h3>
+<div class="spec">
+<p><tt>link_and_notify(Pid::pid()) -&gt; atom()</tt><br></p>
+</div>
+
+<h3 class="function"><a name="merge_neighbors-2">merge_neighbors/2 *</a></h3>
+<div class="spec">
+<p><tt>merge_neighbors(New_neighbor::[pid()], Old_neighbor::[pid()]) -&gt; [pid()]</tt><br></p>
+</div>
+
+<h3 class="function"><a name="not_avail-2">not_avail/2 *</a></h3>
+<div class="spec">
+<p><tt>not_avail(Send::{<a href="#type-guard">guard()</a>, <a href="#type-guard">guard()</a>, <a href="#type-command">command()</a>}, Vars::#variables{}) -&gt; boolean()</tt><br></p>
+</div>
+
+<h3 class="function"><a name="reap_crashed_responses-2">reap_crashed_responses/2 *</a></h3>
+<div class="spec">
+<p><tt>reap_crashed_responses(Trans::<a href="dict.html#type-dict">dict:dict</a>(<a href="#type-trans_id">trans_id()</a>, #tran_aux_info{asked_this = [pid()], max_prop_seq = <a href="#type-trans_seq">trans_seq()</a>, waiting_response = <a href="dict.html#type-dict">dict:dict</a>(pid(), atom()), current_seq = <a href="#type-trans_seq">trans_seq()</a>}), Pid::pid()) -&gt; ok</tt><br></p>
+</div>
+
+<h3 class="function"><a name="send-3">send/3</a></h3>
+<div class="spec">
+<p><tt>send(Pid::pid(), Guard::<a href="#type-guard">guard()</a>, Command::<a href="#type-command">command()</a>) -&gt; ok</tt><br></p>
+</div>
+
+<h3 class="function"><a name="send-4">send/4</a></h3>
+<div class="spec">
+<p><tt>send(Pid::pid(), Avail::<a href="#type-guard">guard()</a>, Guard::<a href="#type-guard">guard()</a>, Command::<a href="#type-command">command()</a>) -&gt; ok</tt><br></p>
+</div>
+
+<h3 class="function"><a name="send_to_nodes-2">send_to_nodes/2 *</a></h3>
+<div class="spec">
+<p><tt>send_to_nodes(Msg::any(), Nodes::[pid()]) -&gt; ok</tt><br></p>
+<p><tt>Msg</tt>: message to send<br>
+<tt>Nodes</tt>: list of receiving pids<br>
+</p>
+</div><p>sends a cast with Msg to every node in Nodes.</p>
+
+<h3 class="function"><a name="start-1">start/1</a></h3>
+<div class="spec">
+<p><tt>start(Vars::#variables{}) -&gt; pid()</tt><br></p>
+</div><p>Given a list of element, create a new peer process, the spawned peer knows no nodes and
+  have state equals to the given list.</p>
+
+<h3 class="function"><a name="start-2">start/2</a></h3>
+<div class="spec">
+<p><tt>start(Vars::#variables{}, Nodes::[pid()]) -&gt; pid()</tt><br></p>
+</div><p>Given a list of nodes, create a new support_server knowing the nodes. The support_server
+  Pid is returned.</p>
+
+<h3 class="function"><a name="start-4">start/4</a></h3>
+<div class="spec">
+<p><tt>start(Vars::#variables{}, Nodes::[pid()], Init::[{<a href="#type-guard">guard()</a>, <a href="#type-guard">guard()</a>, <a href="#type-command">command()</a>} | {<a href="#type-guard">guard()</a>, <a href="#type-command">command()</a>}], Loop::[{<a href="#type-guard">guard()</a>, <a href="#type-guard">guard()</a>, <a href="#type-command">command()</a>} | {<a href="#type-guard">guard()</a>, <a href="#type-command">command()</a>}]) -&gt; pid()</tt><br></p>
+</div>
+
+<h3 class="function"><a name="stop-1">stop/1</a></h3>
+<div class="spec">
+<p><tt>stop(Pid::pid()) -&gt; ok</tt><br></p>
+</div>
+
+<h3 class="function"><a name="to_guarded-1">to_guarded/1 *</a></h3>
+<div class="spec">
+<p><tt>to_guarded(Sends::[{<a href="#type-guard">guard()</a>, <a href="#type-guard">guard()</a>, <a href="#type-command">command()</a>} | {<a href="#type-guard">guard()</a>, <a href="#type-command">command()</a>}]) -&gt; [{<a href="#type-guard">guard()</a>, <a href="#type-guard">guard()</a>, <a href="#type-command">command()</a>}]</tt><br></p>
+</div><p>if Sends contains sends where the availability condition is unspecified it converts them to guarded sends that are always enabled</p>
+
+<h3 class="function"><a name="trans_to_list-1">trans_to_list/1 *</a></h3>
+<div class="spec">
+<p><tt>trans_to_list(Dict::<a href="orddict.html#type-orddict">orddict:orddict</a>(<a href="#type-trans_seq">trans_seq()</a>, #transaction{id = <a href="#type-trans_id">trans_id()</a>, state = <a href="#type-trans_state">trans_state()</a>, seq_number = <a href="#type-trans_seq">trans_seq()</a>, guard = <a href="#type-guard">guard()</a>, command = <a href="#type-command">command()</a>})) -&gt; [#transaction{id = <a href="#type-trans_id">trans_id()</a>, state = <a href="#type-trans_state">trans_state()</a>, seq_number = <a href="#type-trans_seq">trans_seq()</a>, guard = <a href="#type-guard">guard()</a>, command = <a href="#type-command">command()</a>}]</tt><br></p>
+</div>
+
+<h3 class="function"><a name="update_trans-3">update_trans/3 *</a></h3>
+<div class="spec">
+<p><tt>update_trans(New_trans::[#transaction{id = <a href="#type-trans_id">trans_id()</a>, state = <a href="#type-trans_state">trans_state()</a>, seq_number = <a href="#type-trans_seq">trans_seq()</a>, guard = <a href="#type-guard">guard()</a>, command = <a href="#type-command">command()</a>}], My_trans::<a href="orddict.html#type-orddict">orddict:orddict</a>(<a href="#type-trans_seq">trans_seq()</a>, #transaction{id = <a href="#type-trans_id">trans_id()</a>, state = <a href="#type-trans_state">trans_state()</a>, seq_number = <a href="#type-trans_seq">trans_seq()</a>, guard = <a href="#type-guard">guard()</a>, command = <a href="#type-command">command()</a>}), Infos::<a href="dict.html#type-dict">dict:dict</a>(<a href="#type-trans_id">trans_id()</a>, #tran_aux_info{asked_this = [pid()], max_prop_seq = <a href="#type-trans_seq">trans_seq()</a>, waiting_response = <a href="dict.html#type-dict">dict:dict</a>(pid(), atom()), current_seq = <a href="#type-trans_seq">trans_seq()</a>})) -&gt; {<a href="orddict.html#type-orddict">orddict:orddict</a>(<a href="#type-trans_seq">trans_seq()</a>, #transaction{id = <a href="#type-trans_id">trans_id()</a>, state = <a href="#type-trans_state">trans_state()</a>, seq_number = <a href="#type-trans_seq">trans_seq()</a>, guard = <a href="#type-guard">guard()</a>, command = <a href="#type-command">command()</a>}), <a href="dict.html#type-dict">dict:dict</a>(<a href="#type-trans_id">trans_id()</a>, #tran_aux_info{asked_this = [pid()], max_prop_seq = <a href="#type-trans_seq">trans_seq()</a>, waiting_response = <a href="dict.html#type-dict">dict:dict</a>(pid(), atom()), current_seq = <a href="#type-trans_seq">trans_seq()</a>})}</tt><br></p>
+</div>
+<hr>
+
+<div class="navbar"><a name="#navbar_bottom"></a><table width="100%" border="0" cellspacing="0" cellpadding="2" summary="navigation bar"><tr><td><a href="overview-summary.html" target="overviewFrame">Overview</a></td><td><a href="http://www.erlang.org/"><img src="erlang.png" align="right" border="0" alt="erlang logo"></a></td></tr></table></div>
+<p><i>Generated by EDoc</i></p>
+</body>
+</html>
