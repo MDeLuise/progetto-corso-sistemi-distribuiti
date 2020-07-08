@@ -11,7 +11,5 @@ La rete di nodi è altamente mutabile, ovvero l'entrata di un nuovo nodo o l'usc
 
 
 ## Screenshots
-<img src="images/screenshot_1.png" width="500">
-<img src="images/screenshot_2.png" width="500">
-<img src="images/screenshot_3.png" width="500">
-<img src="images/screenshot_4.png" width="500">
+<img src="images/screenshot_1.png" width="400"> <img src="images/screenshot_3.png" width="400"><br>
+<img src="images/screenshot_2.png" width="400"> <img src="images/screenshot_4.png" width="400">
